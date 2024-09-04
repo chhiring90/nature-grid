@@ -1,0 +1,14 @@
+:root ._dsp-flex{display:flex;}
+:root ._fb-auto{flex-basis:auto;}
+:root ._bxs-border-box{box-sizing:border-box;}
+:root ._pos-relative{position:relative;}
+:root ._mih-0px{min-height:0px;}
+:root ._miw-0px{min-width:0px;}
+:root ._fs-0{flex-shrink:0;}
+:root ._fd-row{flex-direction:row;}
+:root ._ai-center{align-items:center;}
+:root ._bg-643859276{background-color:var(--blue8);}
+:root ._gap-1316330269{gap:var(--space-15);}
+:root ._pt-1316331075{padding-top:var(--space-20);}
+:root ._pl-1316330114{padding-left:var(--space-10);}
+:root ._pr-1316330114{padding-right:var(--space-10);}

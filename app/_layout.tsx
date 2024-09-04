@@ -12,7 +12,9 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { TamaguiProvider, Theme } from "@tamagui/core";
 import tamaguiConfig from "@/tamagui.config";
-
+import { Provider, useDispatch, useSelector } from "react-redux";
+import { increaseCount, store } from "@/store";
+import { Button } from "react-native";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -39,15 +41,23 @@ export default function RootLayout() {
     return null;
   }
 
+  //how to use it but not here, use it inside other component. Can't use it here
+
+  // const count = useSelector((state: any) => state.counter.value);
+  // const dispatch = useDispatch();
+  // <Button title="Increase" onPress={() => dispatch(increaseCount())} />
+
   return (
-    <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
-      <Theme>
-        <Stack>
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          <Stack.Screen name="(home)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-      </Theme>
-    </TamaguiProvider>
+    <Provider store={store}>
+      <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
+        <Theme>
+          <Stack>
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            <Stack.Screen name="(home)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </Theme>
+      </TamaguiProvider>
+    </Provider>
   );
 }

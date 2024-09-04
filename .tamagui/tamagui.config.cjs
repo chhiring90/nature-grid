@@ -27733,7 +27733,6 @@ var require_cjs21 = __commonJS({
 // tamagui.config.ts
 var tamagui_config_exports = {};
 __export(tamagui_config_exports, {
-  appConfig: () => appConfig,
   default: () => tamagui_config_default
 });
 module.exports = __toCommonJS(tamagui_config_exports);
@@ -49493,12 +49492,13 @@ var Text4 = (0, import_core77.styled)(import_core77.Text, {
 var import_core78 = require("@tamagui/core");
 
 // tamagui.config.ts
-var appConfig = createTamagui(config);
-var tamagui_config_default = appConfig;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  appConfig
+var appConfig = createTamagui({
+  themes,
+  tokens,
+  ...config
+  // Spread the config to include other necessary properties
 });
+var tamagui_config_default = appConfig;
 /*! Bundled license information:
 
 use-sync-external-store/cjs/use-sync-external-store-shim.production.min.js:
