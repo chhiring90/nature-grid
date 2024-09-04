@@ -18,9 +18,15 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+
   const [loaded] = useFonts({
+    InterMedium: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
+    InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
+    Inter: require("@tamagui/font-inter/otf/Inter-Regular.otf"),
+    InterSemiBold: require("@tamagui/font-inter/otf/Inter-SemiBold.otf"),
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     OpenSansExtraBold: require("../assets/fonts/OpenSans_Condensed-ExtraBold.ttf"),
+    PoppinsBlack: require("../assets/fonts/Poppins-Black.ttf"),
   });
 
   useEffect(() => {

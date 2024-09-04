@@ -5,12 +5,12 @@ export default function AuthLayout() {
   return (
     <Tabs
       screenOptions={{
-        headerShown: false,
         tabBarActiveTintColor: "#0a7ea4",
         tabBarStyle: {
           height: 110,
           borderTopLeftRadius: 35,
           borderTopRightRadius: 35,
+          marginTop: -30,
         },
       }}
     >
@@ -18,6 +18,7 @@ export default function AuthLayout() {
         name="index"
         options={{
           title: "Home",
+          headerShown: false,
           tabBarShowLabel: false,
           tabBarIcon: ({ color }) => <Home size={28} color={color} />,
         }}
@@ -35,6 +36,10 @@ export default function AuthLayout() {
         options={{
           title: "Redeem",
           tabBarShowLabel: false,
+          headerTintColor: "#fff",
+          headerStyle: {
+            backgroundColor: "hsl(151, 40.2%, 54.1%)",
+          },
           tabBarIcon: ({ color }) => <Puzzle size={28} color={color} />,
         }}
       />

@@ -1,75 +1,105 @@
 import HomeNavbar from "@/components/HomeNavbar";
 import {
-  H4,
   H2,
+  Avatar,
   Paragraph,
   YStack,
   Card,
   XStack,
-  Image,
   Button,
   H1,
-  Text,
 } from "tamagui";
-import { Dimensions, View } from "react-native";
-import Carousel from "react-native-reanimated-carousel";
+import LeaderBoardCarousel from "@/components/LeaderBoardCarousel";
+import { ScrollView } from "tamagui";
 
 export default function HomeScreen() {
-  const width = Dimensions.get("window").width;
-
   return (
-    <YStack padding="$10 0 0 0">
-      <HomeNavbar />
-      <YStack background="coral">
-        <H1
-          textTransform="uppercase"
-          fontWeight="900"
-          fontSize="$16"
-          lineHeight="$16"
-          fontFamily="$OpenSansExtraBold"
+    <ScrollView
+      backgroundColor="$blue8"
+      decelerationRate="fast"
+      showsVerticalScrollIndicator={false}
+    >
+      <YStack>
+        <HomeNavbar />
+        <YStack
+          paddingLeft="$3"
+          paddingTop="$5"
+          paddingBottom="$4"
+          backgroundColor="$blue8"
+          paddingRight="$2"
         >
-          011 <Text fontSize="$4">SCORE</Text>
-        </H1>
-        <H2 textTransform="uppercase" fontWeight="900">
-          100
-        </H2>
+          <XStack>
+            <H1
+              color="$purple1"
+              textTransform="uppercase"
+              fontWeight="900"
+              size="$16"
+              letterSpacing="4px"
+              style={{
+                fontFamily: "PoppinsBlack",
+              }}
+            >
+              011
+            </H1>
+            <Paragraph
+              paddingTop="$1"
+              color="$purple1"
+              fontSize="$6"
+              fontWeight="700"
+              letterSpacing={0.5}
+            >
+              SCORE
+            </Paragraph>
+          </XStack>
+          <XStack>
+            <H2
+              textTransform="uppercase"
+              color="$purple1"
+              size="$14"
+              fontWeight="900"
+              style={{
+                fontFamily: "PoppinsBlack",
+              }}
+            >
+              100
+            </H2>
+            <YStack>
+              <Paragraph
+                color="$purple1"
+                paddingTop="$1"
+                fontSize="$6"
+                letterSpacing={0.5}
+                fontWeight="700"
+                textTransform="uppercase"
+              >
+                Coins
+              </Paragraph>
+              <Paragraph
+                color="$purple1"
+                paddingTop="$1"
+                letterSpacing={0.5}
+                fontSize="$6"
+                fontWeight="700"
+                textTransform="uppercase"
+              >
+                Spend
+              </Paragraph>
+            </YStack>
+          </XStack>
+        </YStack>
+        <YStack backgroundColor="$blue7" paddingRight="$3">
+          <H2
+            textTransform="uppercase"
+            color="$blue1"
+            fontWeight="900"
+            padding="$3"
+            letterSpacing="$0.5"
+          >
+            Leader Board
+          </H2>
+          <LeaderBoardCarousel />
+        </YStack>
       </YStack>
-      <H2 textTransform="uppercase" fontWeight="900" padding="$3">
-        Leader Board
-      </H2>
-      <View style={{ flex: 1 }}>
-        <Carousel
-          width={width}
-          height={width / 2}
-          data={[...new Array(5).keys()]}
-          scrollAnimationDuration={1000}
-          onSnapToItem={(index) => console.log("current index:", index)}
-          renderItem={({ index }) => (
-            <XStack flex={1} justifyContent="space-around">
-              <Card size="$6" bordered>
-                <Card.Header padded>
-                  <H2>Sony A{index + 1}IV</H2>
-                  <Paragraph theme="alt2">Now available</Paragraph>
-                </Card.Header>
-                <Card.Footer padded>
-                  <XStack flex={1} />
-                  <Button borderRadius="$10">Purchase</Button>
-                </Card.Footer>
-              </Card>
-              <Card size="$6" bordered>
-                <Card.Header padded>
-                  <H2>Sony A{index + 1}IV</H2>
-                  <Paragraph theme="alt2">Now available</Paragraph>
-                </Card.Header>
-                <Card.Footer padded>
-                  <XStack flex={1} />
-                  <Button borderRadius="$10">Purchase</Button>
-                </Card.Footer>
-              </Card>
-            </XStack>
-          )}
-        />
-      </View>
-    </YStack>
+    </ScrollView>
   );
 }
