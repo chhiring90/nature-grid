@@ -34,37 +34,37 @@ const discountItems = [
   {
     title: "5% OFF Espresso",
     points: 30,
-    icon: <Coffee size="$4" color="$green7" />,
+    icon: <Coffee size="$3" color="$green7" />,
   },
   {
     title: "10% OFF T-shirt",
     points: 100,
-    icon: <Shirt size="$4" color="$green7" />,
+    icon: <Shirt size="$3" color="$green7" />,
   },
   {
     title: "9% OFF Cheese Cake",
     points: 35,
-    icon: <CakeSlice size="$4" color="$green7" />,
+    icon: <CakeSlice size="$3" color="$green7" />,
   },
   {
     title: "20% OFF Cappuccino",
     points: 50,
-    icon: <Coffee size="$4" color="$green7" />,
+    icon: <Coffee size="$3" color="$green7" />,
   },
   {
     title: "5% OFF Sweatshirt",
     points: 150,
-    icon: <Shirt size="$4" color="$green7" />,
+    icon: <Shirt size="$3" color="$green7" />,
   },
   {
     title: "50% OFF Cold Beer",
     points: 45,
-    icon: <Beer size="$4" color="$green7" />,
+    icon: <Beer size="$3" color="$green7" />,
   },
   {
     title: "12% OFF Latte",
     points: 40,
-    icon: <Coffee size="$4" color="$green7" />,
+    icon: <Coffee size="$3" color="$green7" />,
   },
 ];
 
@@ -106,7 +106,7 @@ export default function RedeemScreen() {
                   {item.icon}
                   <YStack
                     paddingLeft="$4"
-                    paddingRight="$2"
+                    paddingRight="$1.5"
                     style={{
                       flexGrow: 1,
                     }}
@@ -114,6 +114,7 @@ export default function RedeemScreen() {
                     <H5
                       style={{
                         fontFamily: "InterBold",
+                        fontSize: 14,
                       }}
                       color="$green7"
                     >

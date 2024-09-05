@@ -47,6 +47,10 @@ export default function AuthLayout() {
         name="settings"
         options={{
           title: "Settings",
+          headerTintColor: "#fff",
+          headerStyle: {
+            backgroundColor: "hsl(151, 40.2%, 54.1%)",
+          },
           tabBarShowLabel: false,
           tabBarIcon: ({ color }) => <Settings size={28} color={color} />,
         }}

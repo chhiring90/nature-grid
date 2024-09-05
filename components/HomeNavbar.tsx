@@ -1,5 +1,6 @@
 import { Avatar, XStack } from "tamagui";
-import { Bell } from "@tamagui/lucide-icons";
+import { Bell, Settings } from "@tamagui/lucide-icons";
+import { Button } from "tamagui";
 
 export default function HomeNavbar() {
   return (
@@ -18,7 +19,19 @@ export default function HomeNavbar() {
         />
         <Avatar.Fallback delayMs={600} backgroundColor="$orange10" />
       </Avatar>
-      <Bell size="$2" marginLeft="auto" marginRight="$1" color="$orange1" />
+      <XStack marginLeft="auto">
+        <Bell
+          onPress={() => console.log("bell")}
+          size="$2"
+          marginRight="$3.5"
+          color="$orange1"
+        />
+        <Settings
+          onPress={() => console.log("settings")}
+          size="$2"
+          color="$orange1"
+        />
+      </XStack>
     </XStack>
   );
 }
