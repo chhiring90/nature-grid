@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import HomeNavbar from "@/components/HomeNavbar";
 import {
   H2,
@@ -11,8 +12,21 @@ import {
 } from "tamagui";
 import LeaderBoardCarousel from "@/components/LeaderBoardCarousel";
 import { ScrollView } from "tamagui";
+import { store } from "@/store";
+import AnimatedNumbers from "react-native-animated-numbers";
+import { useFocusEffect } from "expo-router";
+import { current } from "@reduxjs/toolkit";
 
 export default function HomeScreen() {
+  const { value } = store.getState().counter;
+  const [count, setCount] = useState(value);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setCount((current) => current + value);
+    }, [value])
+  );
+
   return (
     <ScrollView
       backgroundColor="$blue8"
@@ -29,18 +43,19 @@ export default function HomeScreen() {
           paddingRight="$2"
         >
           <XStack>
-            <H1
-              color="$purple1"
-              textTransform="uppercase"
-              fontWeight="900"
-              size="$16"
-              letterSpacing="4px"
-              style={{
-                fontFamily: "PoppinsBlack",
+            <H1 color="$purple1" size="$16" style={{}}></H1>
+            <AnimatedNumbers
+              includeComma
+              fontStyle={{
+                textTransform: "uppercase",
+                fontSize: "130",
+                letterSpacing: "1",
+                lineHeight: "130",
+                fontWeight: "900",
+                color: "#fff",
               }}
-            >
-              011
-            </H1>
+              animateToNumber={count}
+            />
             <Paragraph
               paddingTop="$1"
               color="$purple1"

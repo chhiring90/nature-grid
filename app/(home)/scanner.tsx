@@ -1,62 +1,121 @@
-import React, { Component } from "react";
-
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Linking,
-} from "react-native";
-
-import QRCodeScanner from "react-native-qrcode-scanner";
-import { RNCamera } from "react-native-camera";
-
-// export default function ScannerScreen() {
-//   return <Text>Code Scanner</Text>;
-// }
+import React, { useState, useEffect } from "react";
+import { Text, View, StyleSheet, Button } from "react-native";
+import { BarCodeScanner } from "expo-barcode-scanner";
+import { store, increaseCount } from "@/store";
+import { YStack } from "tamagui";
+import { useToastController, useToastState, Toast } from "@tamagui/toast";
 
 export default function ScannerScreen() {
-  const onSuccess = (e: any) => {
-    Linking.openURL(e.data).catch((err) =>
-      console.error("An error occured", err)
-    );
+  const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
+  const [text, setText] = useState("Not yet scanned");
+  const { counter } = store.getState();
+
+  const currentToast = useToastState();
+  const toast = useToastController();
+
+  const askForCameraPermission = () => {
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === "granted");
+    })();
   };
 
+  useEffect(() => {
+    askForCameraPermission();
+  }, []);
+
+  // What happens when we scan the bar code
+  const handleBarCodeScanned = ({ type, data }: any) => {
+    setScanned(true);
+    setText(data);
+    store.dispatch(increaseCount());
+    toast.show("Score added to the system.", {
+      message: "Hey checkout the new score",
+    });
+  };
+
+  if (hasPermission === null) {
+    return (
+      <View style={styles.container}>
+        <Text>Requesting for camera permission</Text>
+      </View>
+    );
+  }
+
+  if (hasPermission === false) {
+    return (
+      <View style={styles.container}>
+        <Text style={{ margin: 10 }}>No access to camera</Text>
+        <Button
+          title={"Allow Camera"}
+          onPress={() => askForCameraPermission()}
+        />
+      </View>
+    );
+  }
+
   return (
-    <QRCodeScanner
-      onRead={onSuccess}
-      flashMode={RNCamera.Constants.FlashMode.torch}
-      topContent={
-        <Text style={styles.centerText}>
-          Go to <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text>{" "}
-          on your computer and scan the QR code.
-        </Text>
-      }
-      bottomContent={
-        <TouchableOpacity style={styles.buttonTouchable}>
-          <Text style={styles.buttonText}>OK. Got it!</Text>
-        </TouchableOpacity>
-      }
-    />
+    <View style={styles.container}>
+      {!currentToast || currentToast.isHandledNatively ? null : (
+        <Toast
+          key={currentToast.id}
+          duration={currentToast.duration}
+          enterStyle={{ opacity: 0, scale: 0.5, y: -25 }}
+          exitStyle={{ opacity: 0, scale: 1, y: -20 }}
+          y={40}
+          width={350}
+          opacity={1}
+          scale={1}
+          marginLeft={17}
+          backgroundColor="$blue8"
+          animation="200ms"
+          viewportName={currentToast.viewportName}
+        >
+          <YStack>
+            <Toast.Title textAlign="center" color="$blue1">
+              {currentToast.title}
+            </Toast.Title>
+            {!!currentToast.message && (
+              <Toast.Description textAlign="center" color="$blue1">
+                {currentToast.message}
+              </Toast.Description>
+            )}
+          </YStack>
+        </Toast>
+      )}
+      <View style={styles.barcodebox}>
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={{ height: 400, width: 400 }}
+        />
+      </View>
+      <Text style={styles.maintext}>{text}</Text>
+
+      {scanned && (
+        <Button title={"Scan again?"} onPress={() => setScanned(false)} />
+      )}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  centerText: {
+  container: {
     flex: 1,
-    fontSize: 18,
-    padding: 32,
-    color: "#777",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  textBold: {
-    fontWeight: "500",
-    color: "#000",
+  barcodebox: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: 300,
+    width: 300,
+    overflow: "hidden",
+    borderRadius: 30,
+    backgroundColor: "tomato",
   },
-  buttonText: {
-    fontSize: 21,
-    color: "rgb(0,122,255)",
-  },
-  buttonTouchable: {
-    padding: 16,
+  maintext: {
+    fontSize: 16,
+    margin: 20,
   },
 });

@@ -217,7 +217,7 @@ export default function LoginScreen() {
 
 const SignUpLink = () => {
   return (
-    <Paragraph textDecorationStyle="unset" ta="center">
+    <Paragraph textDecorationStyle="unset" textAlign="center">
       Don&apos;t have an account?{" "}
       <SizableText
         hoverStyle={{

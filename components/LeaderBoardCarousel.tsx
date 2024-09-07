@@ -11,7 +11,7 @@ let data = [
     background: "$orange6",
   },
   {
-    name: "Bhagwati Ghimire ",
+    name: "Bhagwat Ghimire ",
     score: 120,
     rank: 2,
     avatar: require("@/assets/images/avatar-01.png"),
@@ -25,7 +25,7 @@ let data = [
     background: "$green6",
   },
   {
-    name: "Rupa Timalsina",
+    name: "Rupak Timalsina",
     score: 100,
     rank: 4,
     avatar: require("@/assets/images/avatar-02.png"),

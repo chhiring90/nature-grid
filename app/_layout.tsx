@@ -7,8 +7,11 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { TamaguiProvider, Theme } from "@tamagui/core";
 import tamaguiConfig from "@/tamagui.config";
-import { Provider } from "react-redux";
-import { store } from "@/store";
+import { Provider, useDispatch, useSelector } from "react-redux";
+import { increaseCount, store } from "@/store";
+import { Button } from "react-native";
+import { Toast, ToastProvider, ToastViewport } from "@tamagui/toast";
+import { PortalProvider } from "tamagui";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -44,13 +47,19 @@ export default function RootLayout() {
   return (
     <Provider store={store}>
       <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
-        <Theme>
-          <Stack>
-            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-            <Stack.Screen name="(home)" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-        </Theme>
+        <PortalProvider>
+          <ToastProvider>
+            <Theme>
+              <Stack>
+                <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+                <Stack.Screen name="(home)" options={{ headerShown: false }} />
+                <Stack.Screen name="+not-found" />
+                <ToastViewport />
+              </Stack>
+            </Theme>
+            <ToastViewport />
+          </ToastProvider>
+        </PortalProvider>
       </TamaguiProvider>
     </Provider>
   );

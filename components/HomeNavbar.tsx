@@ -1,6 +1,7 @@
 import { Avatar, XStack } from "tamagui";
 import { Bell, Settings } from "@tamagui/lucide-icons";
 import { Button } from "tamagui";
+import { Link } from "expo-router";
 
 export default function HomeNavbar() {
   return (
@@ -20,17 +21,12 @@ export default function HomeNavbar() {
         <Avatar.Fallback delayMs={600} backgroundColor="$orange10" />
       </Avatar>
       <XStack marginLeft="auto">
-        <Bell
-          onPress={() => console.log("bell")}
-          size="$2"
-          marginRight="$3.5"
-          color="$orange1"
-        />
-        <Settings
-          onPress={() => console.log("settings")}
-          size="$2"
-          color="$orange1"
-        />
+        <Link href="/(home)/settings">
+          <Bell size="$2" marginRight="$3.5" color="$orange1" />
+        </Link>
+        <Link href="/(home)/settings">
+          <Settings size="$2" color="$orange1" />
+        </Link>
       </XStack>
     </XStack>
   );
