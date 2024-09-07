@@ -9,13 +9,13 @@ import {
   XStack,
   YGroup,
   Card,
-  Image,
   Button,
   ListItem,
   XGroup,
   H5,
   ScrollView,
   Input,
+  H6,
 } from "tamagui";
 import {
   Star,
@@ -29,45 +29,52 @@ import {
   ChevronDown,
 } from "@tamagui/lucide-icons";
 import { ReedemAlert } from "@/components/ReedemAlert";
+import { Image } from "tamagui";
 
 const discountItems = [
   {
-    title: "5% OFF Espresso",
-    points: 30,
-    icon: <Coffee size="$3" color="$green7" />,
+    title: "Kingside Attack Tournament",
+    points: "lorem ipsum dolor sit amet consectetur adipiscing elit",
+    icon: "https://picsum.photos/1500/500",
+    time: "September 15, 2024, 10:00 AM",
   },
   {
-    title: "10% OFF T-shirt",
-    points: 100,
-    icon: <Shirt size="$3" color="$green7" />,
+    title: "Grandmaster Blitz Challenge",
+    points: "lorem ipsum dolor sit amet consectetur adipiscing elit",
+    icon: "https://picsum.photos/1200/500",
+    time: "October 3, 2024, 2:00 PM",
   },
   {
-    title: "9% OFF Cheese Cake",
-    points: 35,
-    icon: <CakeSlice size="$3" color="$green7" />,
+    title: "Opening Theory Showcase",
+    points: "lorem ipsum dolor sit amet consectetur adipiscing elit",
+    icon: "https://picsum.photos/1100/500",
+    time: "November 10, 2024, 11:00 AM",
   },
   {
-    title: "20% OFF Cappuccino",
-    points: 50,
-    icon: <Coffee size="$3" color="$green7" />,
+    title: "Endgame Strategy Symposium",
+    points: "lorem ipsum dolor sit amet consectetur adipiscing elit",
+    icon: "https://picsum.photos/1150/500",
+    time: "December 5, 2024, 1:00 PM",
   },
   {
-    title: "5% OFF Sweatshirt",
-    points: 150,
-    icon: <Shirt size="$3" color="$green7" />,
+    title: "Rapid Chess Masters Duel",
+    points: "lorem ipsum dolor sit amet consectetur adipiscing elit",
+    icon: "https://picsum.photos/1149/500",
+    time: "January 20, 2025, 9:00 AM",
   },
   {
-    title: "50% OFF Cold Beer",
-    points: 45,
-    icon: <Beer size="$3" color="$green7" />,
+    title: "International Chess Festival",
+    points: "lorem ipsum dolor sit amet consectetur adipiscing elit",
+    icon: "https://picsum.photos/1148/500",
+    time: "February 12, 2025, 3:00 PM",
   },
   {
-    title: "12% OFF Latte",
-    points: 40,
-    icon: <Coffee size="$3" color="$green7" />,
+    title: "Fischer Random Championship",
+    points: "lorem ipsum dolor sit amet consectetur adipiscing elit",
+    icon: "https://picsum.photos/1148/501",
+    time: "March 8, 2025, 4:00 PM",
   },
 ];
-
 export default function RedeemScreen() {
   const [isAlertVisible, setAlertVisible] = React.useState(false);
 
@@ -96,14 +103,14 @@ export default function RedeemScreen() {
               marginBottom="$4"
               backgroundColor="$green1"
             >
+              <Image
+                source={{
+                  uri: item.icon,
+                  height: 200,
+                }}
+              />
               <Card.Header padded>
-                <XStack
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  {item.icon}
+                <XStack>
                   <YStack
                     paddingLeft="$4"
                     paddingRight="$1.5"
@@ -111,10 +118,11 @@ export default function RedeemScreen() {
                       flexGrow: 1,
                     }}
                   >
+                    <H6 color="$green8">{item.time}</H6>
                     <H5
                       style={{
                         fontFamily: "InterBold",
-                        fontSize: 14,
+                        fontSize: 15,
                       }}
                       color="$green7"
                     >
@@ -125,10 +133,9 @@ export default function RedeemScreen() {
                       fontWeight="bold"
                       letterSpacing="1px"
                     >
-                      {item.points} Points
+                      {item.points}
                     </Paragraph>
                   </YStack>
-                  <ReedemAlert points={item.points} title={item.title} />
                 </XStack>
               </Card.Header>
             </Card>
